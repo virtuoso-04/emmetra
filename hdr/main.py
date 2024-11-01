@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import os
-from hdr import *
+from hdr import computeHDR
 # Load images and their log exposure times
 def load_images_from_folder(folder):
     images = []

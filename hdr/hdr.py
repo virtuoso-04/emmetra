@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 import random
-
+import time
 
 def linearWeight(pixel_value):
     """ Linear weighting function based on pixel intensity that reduces the
@@ -23,6 +23,23 @@ def linearWeight(pixel_value):
         return pixel_value - z_min
     return z_max - pixel_value
 
+def allsampleIntensities(images):
+    """Use all pixels of the middle image to sample intensities from the exposure stack."""
+    num_images = len(images)
+    mid_img = images[num_images // 2]
+    
+    # Reshape the images to a 1D array to work with all pixels
+    all_pixels = mid_img.reshape(-1)  # Flatten the middle image
+    num_pixels = len(all_pixels)
+    
+    # Prepare an intensity_values array to store sampled intensities for all pixels
+    intensity_values = np.zeros((num_pixels, num_images), dtype=np.uint8)
+    
+    # Sample intensities across all images for each pixel position
+    for j in range(num_images):
+        intensity_values[:, j] = images[j].reshape(-1)  # Flatten each image to match mid_img's shape
+
+    return intensity_values
 
 def sampleIntensities(images):
     """Randomly sample pixel intensities from the exposure stack.
@@ -54,6 +71,8 @@ def sampleIntensities(images):
             idx = random.randrange(len(rows))
             for j in range(num_images):
                 intensity_values[i, j] = images[j][rows[idx], cols[idx]]
+        # print(rows.size)
+    
     return intensity_values
 
 

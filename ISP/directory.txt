@@ -1,0 +1,17 @@
+Image Processor/
+│
+├── isp_app.py                  # Main application script with GUI and processing functions
+├── images/                     # Folder to store input and output images
+│   ├── sample.raw              # Sample 12-bit Bayer raw image for testing
+│   └── output.png              # Placeholder for processed output images
+├── processor/                 # Folder for ISP processing functions
+│   ├── __init__.py             # Makes `processing` a package
+│   ├── demosaic.py             # Contains demosaicing function
+│   ├── white_balance.py        # Contains white balance function
+│   ├── denoise.py              # Contains denoising function
+│   ├── gamma_correction.py     # Contains gamma correction function
+│   └── sharpen.py              # Contains sharpening function
+└── requirements.txt            # List of dependencies
+
+venv:
+directory.txt
